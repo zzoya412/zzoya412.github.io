@@ -1,0 +1,240 @@
+@charset "UTF-8";
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+/* ------------------------------
+   기본 설정
+------------------------------ */
+:root {
+  --color-bg: #171717;
+  --color-text: #f7f7f7;
+  --color-accent: #67fffc;
+  --content-width: 1920px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+
+.page {
+  width: min(100%, var(--content-width));
+  min-height: 100vh;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+/* ------------------------------
+   상단 반복 문구 띠
+------------------------------ */
+.ticker {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: clamp(40px, 3.05vw, 62px);
+  margin-top: 0px;
+  overflow: hidden;
+  background: var(--color-accent);
+  color: #101010;
+}
+
+.ticker__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  min-width: max-content;
+  animation: ticker-scroll 34s linear infinite;
+}
+
+.ticker__text {
+  flex: 0 0 auto;
+  padding-right: 0.42em;
+  font-size: clamp(17px, 1.28vw, 26px);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ------------------------------
+   메인 인트로
+------------------------------ */
+.intro {
+  padding: clamp(160px, 11vw, 190px) 5.2% 110px;
+  text-align: center;
+}
+
+/* 메인 타이틀 공통 */
+.intro__title {
+  margin: 0;
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.20em;
+}
+
+
+/* 상단 WHAT IS */
+.intro__title-line--white {
+  color: var(--color-text);
+  font-size: 120px;
+}
+
+/* 하단 K-POP MD? */
+.intro__title-line--accent {
+  margin-top: 0.070em;
+  color: var(--color-accent);
+  font-size: 150px;
+}
+
+.intro__title-line {
+  display: block;
+}
+
+.intro__title-line--white {
+  color: var(--color-text);
+}
+
+.intro__title-line--accent {
+  margin-top: 0.055em;
+  color: var(--color-accent);
+}
+
+/* ------------------------------
+   K-POP MD 설명
+------------------------------ */
+.definition {
+  margin: clamp(130px, 7vw, 130px) auto 0;
+  max-width: 1500px;
+}
+
+.definition__title {
+  margin: 0 0 20px;
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.00;
+  letter-spacing: -0.04em;
+}
+
+.definition__title span {
+  color: var(--color-accent);
+}
+
+.definition__description {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.04em;
+}
+
+/* ------------------------------
+   반응형
+------------------------------ */
+@media (max-width: 768px) {
+  .ticker {
+    margin-top: 28px;
+  }
+
+  .intro {
+    padding: 128px 6% 100px;
+  }
+
+  .intro__title {
+    font-size: clamp(52px, 12vw, 92px);
+    letter-spacing: -0.08em;
+  }
+
+  .definition {
+    margin-top: 82px;
+  }
+
+  .definition__title {
+    margin-bottom: 20px;
+    font-size: clamp(20px, 4.5vw, 27px);
+  }
+
+  .definition__description {
+    font-size: clamp(14px, 3.2vw, 17px);
+    line-height: 1.85;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+  }
+}
+/* ------------------------------
+   화면별 스크롤 설정
+------------------------------ */
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.page-section {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 55px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* 두 번째 화면 */
+.second-section {
+  background: #222222;
+}
+/* ------------------------------
+   표지 스크롤 인터랙션
+------------------------------ */
+
+.cover-section {
+  height: 200vh;
+  min-height: 200vh;
+}
+
+.cover-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: var(--color-bg);
+}
+
+.intro__title-line--white,
+.intro__title-line--accent,
+.definition__title,
+.definition__description {
+  will-change: transform, opacity;
+}
